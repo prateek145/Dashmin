@@ -63,18 +63,24 @@ class UserController extends Controller
         try {
             //code...
             // dd($request->all());
-            $data = $request->all();
-            unset($data['_token']);
-            unset($data['password']);
-            unset($data['repassword']);
-            // dd($data);
-            $data['password'] = Hash::make($request->password);
-            // dd($data);
-            User::create($data);
-            return redirect()
-                ->route('users.index')
-                ->with('success', 'User Created');
-        } catch (\Throwable $th) {
+            if ($request->password == $request->repassword) {
+                # code...
+                $data = $request->all();
+                unset($data['_token']);
+                unset($data['password']);
+                unset($data['repassword']);
+                // dd($data);
+                $data['password'] = Hash::make($request->password);
+                // dd($data);
+                User::create($data);
+                return redirect()
+                    ->route('users.index')
+                    ->with('success', 'User Created');
+            } else {
+                # code...
+                throw new \Exception('Password Does Not Matched');
+            }
+        } catch (\Exception $th) {
             //throw $th;
             return redirect()
                 ->back()
@@ -118,7 +124,8 @@ class UserController extends Controller
     {
         try {
             //code...
-            // dd($request->all());
+            // dd($request->all())
+
             $data = $request->all();
             unset($data['_token']);
             unset($data['password']);
