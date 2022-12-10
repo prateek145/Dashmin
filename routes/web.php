@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\backend\AuditController;
+use App\Http\Controllers\backend\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,4 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'home'])->name('backend.home');
 Route::resource('audits', AuditController::class);
+Route::resource('users', UserController::class);

@@ -21,6 +21,9 @@ class AuditController extends Controller
             return view('backend.audit.index', compact('audits'));
         } catch (\Exception $th) {
             //throw $th;
+            return redirect()
+                ->back()
+                ->with('error', $th->getMessage());
         }
     }
 

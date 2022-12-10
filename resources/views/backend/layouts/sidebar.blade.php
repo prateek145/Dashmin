@@ -28,6 +28,16 @@
 
                 </div>
             </div>
+
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
+                        class="fa fa-user me-2"></i>Users</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="{{ route('users.index') }}" class="dropdown-item">View All</a>
+                    <a href="{{ route('users.create') }}" class="dropdown-item">New</a>
+
+                </div>
+            </div>
             <!--<div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Elements</a>
                 <div class="dropdown-menu bg-transparent border-0">

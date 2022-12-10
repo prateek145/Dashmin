@@ -11,22 +11,22 @@
                 <table class="table text-start align-middle table-bordered table-hover mb-0">
                     <thead>
                         <tr class="text-dark">
-                            <th scope="col">Date</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Compliance</th>
-                            <th scope="col">Report Date</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Created At</th>
+                            {{-- <th scope="col">Report Date</th>
                             <th scope="col">Expiry</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Action</th> --}}
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($audits as $item)
+                        @foreach ($users as $item)
                             <tr>
-                                <td>{{ $item->expiry_date }}</td>
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->compliance }}</td>
-                                <td>{{ $item->report_date }}</td>
-                                <td>{{ $item->sharewith }}</td>
+                                <td>{{ $item->firstname . ' ' . $item->lastname }}</td>
+                                <td>{{ $item->email }}</td>
+                                <td>{{ $item->created_at }}</td>
+                                {{-- <td>{{ $item->report_date }}</td>
+                                <td>{{ $item->sharewith }}</td> --}}
 
                                 <td class="d-flex justify-content-between"><a class="btn btn-sm btn-primary"
                                         href="{{ route('users.edit', $item->id) }}">Edit</a>
