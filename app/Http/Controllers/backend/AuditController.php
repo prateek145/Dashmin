@@ -58,6 +58,7 @@ class AuditController extends Controller
         $this->validate($request, $rules, $custommessages);
         try {
             $data = $request->all();
+            // dd($request->all());
             unset($data['_token']);
             if ($request->compliance) {
                 # code...

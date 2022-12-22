@@ -21,15 +21,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="{{ asset('backend/dashmin/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('backend/dashmin/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}"
+    <link href="{{ asset('public/backend/dashmin/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/backend/dashmin/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}"
         rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{ asset('backend/dashmin/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/backend/dashmin/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="{{ asset('backend/dashmin/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/backend/dashmin/css/style.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -80,16 +80,17 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('backend/dashmin/lib/chart/chart.min.js') }}"></script>
-    <script src="{{ asset('backend/dashmin/lib/easing/easing.min.js') }}"></script>
-    <script src="{{ asset('backend/dashmin/lib/waypoints/waypoints.min.js') }}"></script>
-    <script src="{{ asset('backend/dashmin/lib/owlcarousel/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('backend/dashmin/lib/tempusdominus/js/moment.min.js') }}"></script>
-    <script src="{{ asset('backend/dashmin/lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
-    <script src="{{ asset('backend/dashmin/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+    <script src="{{ asset('public/backend/dashmin/lib/chart/chart.min.js') }}"></script>
+    <script src="{{ asset('public/backend/dashmin/lib/easing/easing.min.js') }}"></script>
+    <script src="{{ asset('public/backend/dashmin/lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ asset('public/backend/dashmin/lib/owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('public/backend/dashmin/lib/tempusdominus/js/moment.min.js') }}"></script>
+    <script src="{{ asset('public/backend/dashmin/lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
+    <script src="{{ asset('public/backend/dashmin/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+
 
     <!-- Template Javascript -->
-    <script src="{{ asset('backend/dashmin/js/main.js') }}"></script>
+    <script src="{{ asset('public/backend/dashmin/js/main.js') }}"></script>
 </body>
 
 </html>
