@@ -38,6 +38,8 @@
                                 </div>
 
                             </div>
+                            <input type="hidden" value="{{ auth()->id() }}" name="user_id">
+
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Submit</button>
