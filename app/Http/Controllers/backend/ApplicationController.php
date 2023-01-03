@@ -56,21 +56,21 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'name' => 'required',
-            // 'attachments' => 'required|mimes:pdf,jpg,png|min:5|max:2048',
-            'status' => 'required',
-            'description' => 'required',
-        ];
-
-        $custommessages = [];
-
-        $this->validate($request, $rules, $custommessages);
         try {
+            $rules = [
+                'name' => 'required',
+                // 'attachments' => 'required|mimes:pdf,jpg,png|min:5|max:2048',
+                'status' => 'required',
+                // 'description' => 'required',
+            ];
+
+            $custommessages = [];
+
+            $this->validate($request, $rules, $custommessages);
             //code...
             $data = $request->all();
+            // dd($data);
             unset($data['_token']);
-            unset($data['attachments']);
             if ($request->attachments) {
                 $attachments = [];
                 # code...

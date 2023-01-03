@@ -91,9 +91,46 @@
                         <div class="container-fluid pt-4 px-4">
                             <div class="bg-light text-center rounded p-4">
                                 <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <h6 class="mb-0">Attachments</h6>
+                                    <h6 class="mb-0">Applications</h6>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal" data-bs-whatever="@mdo">New</button>
 
                                 </div>
+
+                                <div class="modal fade" id="exampleModal" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <form action="{{ route('application.update', $application->id) }}" method="POST"
+                                            enctype="multipart/form-data">
+                                            @method('PUT')
+                                            @csrf
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">New Attachment</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <label for="recipient-name"
+                                                            class="col-form-label fw-bold text-left @error('name') is-invalid @enderror">File</label>
+                                                        <input type="file" class="form-control" id="description"
+                                                            name="attachments">
+                                                    </div>
+                                                    <input type="hidden" value="{{ $application->id }}"
+                                                        name="application_id">
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
                                 <div class="table-responsive">
                                     <table class="table text-start align-middle table-bordered table-hover mb-0">
                                         <thead>
@@ -135,10 +172,10 @@
                             </div>
                         </div>
 
-                        <div class="container-fluid pt-4 px-4">
+                        {{-- <div class="container-fluid pt-4 px-4">
                             <div class="bg-light text-start rounded p-4">
                                 <div class="d-flex align-items-center justify-content-between mb-4">
-                                    {{-- <h6 class="mb-0">Application Create</h6> --}}
+                               
 
                                 </div>
                                 <div class="bg-light rounded h-100 p-4">
@@ -167,16 +204,79 @@
 
 
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                         <div class="container-fluid pt-4 px-4">
                             <div class="bg-light text-center rounded p-4">
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <h6 class="mb-0">Fields Table</h6>
-                                    <button class="btn btn-primary">New</button>
-
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModa" data-bs-whatever="@mdo">New</button>
                                 </div>
+
+                                <div class="modal fade" id="exampleModa" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <form action="{{ route('field.store') }}" method="POST"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Field Create</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <label for="recipient-name"
+                                                            class="col-form-label fw-bold text-left ">Name</label>
+                                                        <input type="text" class="form-control " id="description"
+                                                            name="name" required>
+                                                    </div>
+                                                    <div class="class mb-3">
+                                                        <label for="exampleInputEmail1" class="form-label">Type</label>
+                                                        <select name="type" id=""
+                                                            class="form-control @error('type') is-invalid @enderror"
+                                                            required>
+                                                            <option value="date">Date</option>
+                                                            <option value="file">File</option>
+                                                            <option value="file">Images</option>
+                                                            <option value="number">Ip Address</option>
+                                                            <option value="number">Numeric</option>
+                                                            <option value="text">Text</option>
+                                                            <option value="text">Value</option>
+                                                            <option value="text">User Group List</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="class mb-3">
+                                                        <label for="exampleInputEmail1" class="form-label">Status</label>
+                                                        <select name="status" id=""
+                                                            class="form-control @error('status') is-invalid @enderror">
+                                                            <option value="1">Active</option>
+                                                            <option value="0">In Active</option>
+                                                        </select>
+                                                    </div>
+                                                    <input type="hidden" value="{{ $application->id }}"
+                                                        name="application_id">
+                                                    <input type="hidden" value="{{ auth()->id() }}" name="user_id">
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+
                                 <div class="table-responsive">
                                     <table class="table text-start align-middle table-bordered table-hover mb-0">
                                         <thead>
@@ -220,10 +320,10 @@
                             </div>
                         </div>
 
-                        <div class="container-fluid pt-4 px-4">
+                        {{-- <div class="container-fluid pt-4 px-4">
                             <div class="bg-light text-start rounded p-4">
                                 <div class="d-flex align-items-center justify-content-between mb-4">
-                                    {{-- <h6 class="mb-0">Application Create</h6> --}}
+
 
                                 </div>
                                 <div class="bg-light rounded h-100 p-4">
@@ -287,7 +387,7 @@
 
 
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                         Et diam et est sed vero ipsum voluptua dolor et, sit eos justo ipsum no ipsum amet sed aliquyam
