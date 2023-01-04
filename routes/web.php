@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\backend\AuditController;
 use App\Http\Controllers\backend\ApplicationController;
+use App\Http\Controllers\backend\GroupController;
 use App\Http\Controllers\backend\UserController;
 use App\Http\Controllers\backend\FieldController;
 
@@ -36,5 +37,6 @@ Route::get('/home', [HomeController::class, 'home'])->name('backend.home');
 Route::resource('audits', AuditController::class);
 Route::resource('users', UserController::class);
 Route::resource('application', ApplicationController::class);
+Route::resource('group', GroupController::class);
 Route::resource('field', FieldController::class);
 Route::delete('attachment/delete/{id}', [ApplicationController::class, 'attachment_delete'])->name('attachment.delete');

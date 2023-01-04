@@ -7,6 +7,7 @@
                 {{-- <h6 class="mb-0">Application Create</h6> --}}
 
             </div>
+            {{-- {{ dd(Session::get('genral'), Session::get('field')) }} --}}
 
             <div class="bg-light rounded h-100 p-4">
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -16,7 +17,7 @@
                             aria-selected="true">Genral</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                        <button class="nav-link " id="pills-profile-tab" data-bs-toggle="pill"
                             data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
                             aria-selected="false">Fields</button>
                     </li>
@@ -88,10 +89,10 @@
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
 
-                        <div class="container-fluid pt-4 px-4">
-                            <div class="bg-light text-center rounded p-4">
+                        <div class="container-fluid pt-4 px-0">
+                            <div class="bg-light text-center rounded ">
                                 <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <h6 class="mb-0">Applications</h6>
+                                    <h6 class="mb-0">Attachments</h6>
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal" data-bs-whatever="@mdo">New</button>
 
@@ -111,9 +112,9 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <div class="mb-3">
+                                                    <div class="mb-3 text-start">
                                                         <label for="recipient-name"
-                                                            class="col-form-label fw-bold text-left @error('name') is-invalid @enderror">File</label>
+                                                            class="col-form-label fw-bold  @error('name') is-invalid @enderror">File</label>
                                                         <input type="file" class="form-control" id="description"
                                                             name="attachments">
                                                     </div>
@@ -206,9 +207,9 @@
                             </div>
                         </div> --}}
                     </div>
-                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                        <div class="container-fluid pt-4 px-4">
-                            <div class="bg-light text-center rounded p-4">
+                    <div class="tab-pane fade " id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                        <div class="container-fluid pt-4 px-0">
+                            <div class="bg-light text-center rounded">
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <h6 class="mb-0">Fields Table</h6>
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -228,14 +229,15 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <div class="mb-3">
+                                                    <div class="mb-3 text-start">
                                                         <label for="recipient-name"
-                                                            class="col-form-label fw-bold text-left ">Name</label>
+                                                            class="col-form-label fw-bold  ">Name</label>
                                                         <input type="text" class="form-control " id="description"
                                                             name="name" required>
                                                     </div>
-                                                    <div class="class mb-3">
-                                                        <label for="exampleInputEmail1" class="form-label">Type</label>
+                                                    <div class="class mb-3 text-start">
+                                                        <label for="exampleInputEmail1"
+                                                            class="form-label fw-bold">Type</label>
                                                         <select name="type" id=""
                                                             class="form-control @error('type') is-invalid @enderror"
                                                             required>
@@ -250,8 +252,9 @@
                                                         </select>
                                                     </div>
 
-                                                    <div class="class mb-3">
-                                                        <label for="exampleInputEmail1" class="form-label">Status</label>
+                                                    <div class="class mb-3 text-start">
+                                                        <label for="exampleInputEmail1"
+                                                            class="form-label fw-bold">Status</label>
                                                         <select name="status" id=""
                                                             class="form-control @error('status') is-invalid @enderror">
                                                             <option value="1">Active</option>
@@ -295,11 +298,28 @@
                                                 <tr>
                                                     <td>{{ $item->name }}</td>
                                                     <td>{{ $item->type }}</td>
-                                                    <td>{{ $item->status }}</td>
-                                                    <td>{{ $item->user_id }}</td>
+                                                    <td>
+                                                        @if ($item->status == 1)
+                                                            Active
+                                                        @else
+                                                            InActive
+                                                        @endif
+                                                    </td>
+                                                    @php
+                                                        if ($item->user_id) {
+                                                            $user = App\Models\User::find($item->user_id);
+                                                            $username = $user->name;
+                                                        } else {
+                                                            $username = 'none';
+                                                        }
+                                                    @endphp
+                                                    <td>{{ $username }}</td>
                                                     <td>{{ $item->created_at }}</td>
                                                     <td>{{ $item->updated_at }}</td>
                                                     <td class="d-flex justify-content-between">
+
+                                                        <a class="btn btn-sm btn-primary"
+                                                            href="{{ route('field.edit', $item->id) }}">Edit</a>
 
                                                         <form action="{{ route('field.destroy', $item->id) }}"
                                                             method="post">

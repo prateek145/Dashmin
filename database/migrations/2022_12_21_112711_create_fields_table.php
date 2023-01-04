@@ -21,6 +21,10 @@ return new class extends Migration {
             $table->string('description')->nullable();
             $table->integer('application_id')->nullable();
             $table->integer('user_id')->nullable();
+            $table->integer('requiredfield')->default(0);
+            $table->integer('requireuniquevalue')->default(0);
+            $table->integer('keyfield')->default(0);
+            $table->longText('groups')->nullable();
             // $table->string('name')->nullable();
             $table->timestamps();
         });

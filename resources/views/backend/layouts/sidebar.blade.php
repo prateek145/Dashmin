@@ -51,10 +51,10 @@
 
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                        class="fa fa-exclamation-triangle me-2"></i>Permission</a>
+                        class="fa fa-exclamation-triangle me-2"></i>Groups</a>
                 <div class="dropdown-menu bg-transparent border-0">
-                    <a href="{{ route('users.index') }}" class="dropdown-item">View All</a>
-                    <a href="{{ route('users.create') }}" class="dropdown-item">New</a>
+                    <a href="{{ route('group.index') }}" class="dropdown-item">View All</a>
+                    <a href="{{ route('group.create') }}" class="dropdown-item">New</a>
 
                 </div>
             </div>

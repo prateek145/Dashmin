@@ -4,10 +4,10 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\backend\Field;
 use App\Models\backend\Group;
+use App\Models\User;
 
-class FieldController extends Controller
+class GroupController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,6 +17,17 @@ class FieldController extends Controller
     public function index()
     {
         //
+        try {
+            //code...
+            $groups = Group::latest()->get();
+            $users = User::all();
+            return view('backend.group.index', compact('groups', 'users'));
+        } catch (\Exception $th) {
+            //throw $th;
+            return redirect()
+                ->back()
+                ->with('error', $th->getMessage());
+        }
     }
 
     /**
@@ -26,7 +37,15 @@ class FieldController extends Controller
      */
     public function create()
     {
-        //
+        try {
+            //code...
+            return view('backend.applications.create');
+        } catch (\Exception $th) {
+            //throw $th;
+            return redirect()
+                ->back()
+                ->with('error', $th->getMessage());
+        }
     }
 
     /**
@@ -37,28 +56,32 @@ class FieldController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'name' => 'required',
-            'type' => 'required',
-            'status' => 'required',
-        ];
-
-        $custommessages = [];
-
-        $this->validate($request, $rules, $custommessages);
         try {
+            // dd($request->all());
+            $rules = [
+                'name' => 'required',
+                // 'attachments' => 'required|mimes:pdf,jpg,png|min:5|max:2048',
+                'userids' => 'required',
+                'user_id' => 'required',
+                'status' => 'required',
+                // 'description' => 'required',
+            ];
+
+            $custommessages = [];
+
+            $this->validate($request, $rules, $custommessages);
             //code...
             $data = $request->all();
-            unset($data['_token']);
             // dd($data);
-            Field::create($data);
-            // $genral = '';
-            // $field = 'active';
-            // $genraltab = '';
-            // $fieldtab = 'show active';
+            unset($data['_token']);
+            unset($data['userids']);
+
+            $data['userids'] = json_encode($request->userids);
+            // dd($data);
+            Group::create($data);
             return redirect()
-                ->back()
-                ->with(['success' => 'Field Created.', 'genral' => '', 'field' => 'active', 'genraltab' => '', 'fieldtab' => 'show active']);
+                ->route('group.index')
+                ->with('success', 'Group Created.');
         } catch (\Exception $th) {
             //throw $th;
             return redirect()
@@ -88,10 +111,12 @@ class FieldController extends Controller
     {
         try {
             //code...
-            $field = Field::find($id);
-            $groups = Group::where(['status' => 1])->get();
-            // dd($field);
-            return view('backend.field.edit', compact('field', 'groups'));
+            $group = Group::find($id);
+            // dd($application->attachments);
+            $users = User::all();
+            $userids = json_decode($group->userids);
+            return view('backend.group.edit', compact('group', 'users', 'userids'));
+            // dd($audit);
         } catch (\Exception $th) {
             //throw $th;
             return redirect()
@@ -111,28 +136,33 @@ class FieldController extends Controller
     {
         try {
             //code...
+            // dd($request->all(), $request->application_id);
+
+            $rules = [
+                'name' => 'required',
+                // 'attachments' => 'required|mimes:pdf,jpg,png|min:5|max:2048',
+                'userids' => 'required',
+                'user_id' => 'required',
+                'status' => 'required',
+            ];
+
+            $custommessages = [];
+
+            $this->validate($request, $rules, $custommessages);
             $data = $request->all();
-            // dd($data);
             unset($data['_token']);
             unset($data['_method']);
-            unset($data['groups']);
+            unset($data['userids']);
 
-            if (count($request->groups) > 0) {
-                # code...
-                $data['groups'] = json_encode($request->groups);
-            }
-
-            if ($request->access == 'private') {
-                # code...
-                $data['groups'] = null;
-            }
+            $data['userids'] = json_encode($request->userids);
             // dd($data);
-            $audit = Field::find($id);
-            $audit->update($data);
-
+            $group = Group::find($id);
+            $group->update($data);
+            // dd($group);
+            # code...
             return redirect()
                 ->back()
-                ->with(['success' => 'Successfully Field Edit.']);
+                ->with('success', 'Successfully Group Updated.');
         } catch (\Exception $th) {
             //throw $th;
             return redirect()
@@ -151,11 +181,10 @@ class FieldController extends Controller
     {
         try {
             //code...
-            // dd($id);
-            $audit = Field::destroy($id);
+            $audit = Group::destroy($id);
             return redirect()
                 ->back()
-                ->with('success', 'Successfully Field Delete.');
+                ->with('success', 'Successfully Group Delete.');
             // dd($audit);
         } catch (\Exception $th) {
             //throw $th;
