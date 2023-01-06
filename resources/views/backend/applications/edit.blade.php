@@ -242,7 +242,7 @@
                                                             class="form-control @error('type') is-invalid @enderror"
                                                             required>
                                                             <option value="date">Date Time</option>
-                                                            <option value="file">File/ Images< option>
+                                                            <option value="file">File/ Images </option>
                                                             <option value="number">Ip Address/ Numeric</option>
                                                             <option value="text">Text</option>
                                                             <option value="longText">Value List/ User Group List</option>
