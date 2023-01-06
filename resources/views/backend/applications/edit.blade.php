@@ -84,7 +84,7 @@
                                 @enderror
                             </div> --}}
 
-                            <input type="hidden" value="{{ auth()->id() }}" name="user_id">
+                            <input type="hidden" value="{{ auth()->id() }}" name="updated_by">
 
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
