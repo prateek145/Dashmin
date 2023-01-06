@@ -109,6 +109,17 @@ class FieldController extends Controller
     {
         try {
             //code...
+            $rules = [
+                'name' => 'required',
+                'forder' => 'required|unique:fields,forder',
+                'type' => 'required',
+                'status' => 'required',
+            ];
+
+            $custommessages = [];
+
+            $this->validate($request, $rules, $custommessages);
+
             $data = $request->all();
             // dd($data);
             unset($data['_token']);

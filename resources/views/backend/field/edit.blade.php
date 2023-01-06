@@ -8,7 +8,20 @@
 
             </div>
             <div class="bg-light rounded h-100 p-4">
-                <h6 class="mb-4">Field </h6>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="mb-4">Field </h6>
+
+                    </div>
+
+                    {{-- <div class="col-md-6 text-end">
+                        <button class="btn btn-primary">
+                            <a href="">
+                                <-return back</a> </button>
+                    </div> --}}
+
+                </div>
+
                 <form action="{{ route('field.update', $field->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
@@ -33,12 +46,24 @@
                             <option value="longText">User Group List</option>
                         </select>
                     </div>
-                    <div class="class mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Status</label>
-                        <select name="status" id="" class="form-control @error('status') is-invalid @enderror">
-                            <option value="1">Active</option>
-                            <option value="0">In Active</option>
-                        </select>
+                    <div class="class mb-3 row">
+
+                        <div class="col-md-6">
+                            <label for="exampleInputEmail1" class="form-label">Status</label>
+                            <select name="status" id=""
+                                class="form-control @error('status') is-invalid @enderror">
+                                <option value="1">Active</option>
+                                <option value="0">In Active</option>
+                            </select>
+
+                        </div>
+
+                        <div class="col-md-6 mt-2">
+                            <label for="forder">Order</label>
+                            <input class="form-control" type="number" name="forder" value="{{ $field->forder }}"
+                                placeholder="Field Order">
+
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="">Options</label><br>
