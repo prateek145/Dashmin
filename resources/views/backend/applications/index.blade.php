@@ -61,6 +61,7 @@
                     </thead>
                     <tbody>
                         @foreach ($applications as $item)
+                            {{-- {{ dd($item) }} --}}
                             <tr>
                                 <td>
                                     <a href="{{ route('application.edit', $item->id) }}"> {{ $item->name }}</a>
