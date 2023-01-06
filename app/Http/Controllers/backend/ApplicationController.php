@@ -118,8 +118,12 @@ class ApplicationController extends Controller
             //code...
             $application = Application::find($id);
             // dd($application->attachments);
-            $attachments = Attachments::where('application_id', $id)->get();
-            $fields = Field::where('application_id', $id)->get();
+            $attachments = Attachments::where('application_id', $id)
+                ->latest()
+                ->get();
+            $fields = Field::where('application_id', $id)
+                ->latest()
+                ->get();
             // dd($attachments);
             return view('backend.applications.edit', compact('application', 'attachments', 'fields'));
             // dd($audit);

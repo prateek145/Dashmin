@@ -21,11 +21,11 @@
                             data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
                             aria-selected="false">Fields</button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    {{-- <li class="nav-item" role="presentation">
                         <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
                             data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
                             aria-selected="false">Contact</button>
-                    </li>
+                    </li> --}}
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -98,8 +98,8 @@
 
                                 </div>
 
-                                <div class="modal fade" id="exampleModal" tabindex="-1"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
                                     <div class="modal-dialog">
                                         <form action="{{ route('application.update', $application->id) }}" method="POST"
                                             enctype="multipart/form-data">
@@ -207,7 +207,7 @@
                             </div>
                         </div> --}}
                     </div>
-                    <div class="tab-pane fade " id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                         <div class="container-fluid pt-4 px-0">
                             <div class="bg-light text-center rounded">
                                 <div class="d-flex align-items-center justify-content-between mb-4">
@@ -241,14 +241,11 @@
                                                         <select name="type" id=""
                                                             class="form-control @error('type') is-invalid @enderror"
                                                             required>
-                                                            <option value="date">Date</option>
-                                                            <option value="file">File</option>
-                                                            <option value="file">Images</option>
-                                                            <option value="number">Ip Address</option>
-                                                            <option value="number">Numeric</option>
+                                                            <option value="date">Date Time</option>
+                                                            <option value="file">File/ Images< option>
+                                                            <option value="number">Ip Address/ Numeric</option>
                                                             <option value="text">Text</option>
-                                                            <option value="text">Value</option>
-                                                            <option value="text">User Group List</option>
+                                                            <option value="longText">Value List/ User Group List</option>
                                                         </select>
                                                     </div>
 
@@ -287,8 +284,7 @@
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Type</th>
                                                 <th scope="col">Status</th>
-                                                <th scope="col">Created By</th>
-                                                <th scope="col">Created At</th>
+                                                <th scope="col">Updated By</th>
                                                 <th scope="col">Updated At</th>
                                                 <th scope="col">Action</th>
                                             </tr>
@@ -296,7 +292,9 @@
                                         <tbody>
                                             @foreach ($fields as $item)
                                                 <tr>
-                                                    <td>{{ $item->name }}</td>
+                                                    <td><a
+                                                            href="{{ route('field.edit', $item->id) }}">{{ $item->name }}</a>
+                                                    </td>
                                                     <td>{{ $item->type }}</td>
                                                     <td>
                                                         @if ($item->status == 1)
@@ -305,16 +303,16 @@
                                                             InActive
                                                         @endif
                                                     </td>
+
                                                     @php
-                                                        if ($item->user_id) {
-                                                            $user = App\Models\User::find($item->user_id);
-                                                            $username = $user->name;
+                                                        if ($item->updated_by) {
+                                                            $udpated = App\Models\User::find($item->user_id);
+                                                            $udpatedby = $udpated->name;
                                                         } else {
-                                                            $username = 'none';
+                                                            $udpatedby = 'none';
                                                         }
                                                     @endphp
-                                                    <td>{{ $username }}</td>
-                                                    <td>{{ $item->created_at }}</td>
+                                                    <td>{{ $udpatedby }}</td>
                                                     <td>{{ $item->updated_at }}</td>
                                                     <td class="d-flex justify-content-between">
 
@@ -409,11 +407,11 @@
                             </div>
                         </div> --}}
                     </div>
-                    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                    {{-- <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                         Et diam et est sed vero ipsum voluptua dolor et, sit eos justo ipsum no ipsum amet sed aliquyam
                         dolore, ut ipsum sanctus et consetetur. Sit ea sit clita lorem ea gubergren. Et dolore vero sanctus
                         voluptua ipsum sadipscing amet at. Et sed dolore voluptua dolor eos tempor, erat amet.
-                    </div>
+                    </div> --}}
                 </div>
 
             </div>
@@ -441,6 +439,13 @@
             if (currentstatus[index].value == status) {
                 currentstatus[index].selected = true;
             }
+        }
+        var field = "{{ Session::get('field') }}";
+        if (field == 'active') {
+            document.getElementById('pills-home-tab').className = 'nav-link';
+            document.getElementById('pills-profile-tab').className = 'nav-link active';
+            document.getElementById('pills-home').className = 'tab-pane fade';
+            document.getElementById('pills-profile').className = 'tab-pane fade show active';
         }
     </script>
 @endsection

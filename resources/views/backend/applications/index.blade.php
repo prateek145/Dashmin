@@ -52,18 +52,20 @@
                 <table class="table text-start align-middle table-bordered table-hover mb-0">
                     <thead>
                         <tr class="text-dark">
-                            <th scope="col">Date</th>
                             <th scope="col">Name</th>
                             <th scope="col">Status</th>
-                            <th scope="col">UserName</th>
+                            <th scope="col">Updated By</th>
+                            <th scope="col">Updated At</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($applications as $item)
                             <tr>
-                                <td>{{ $item->created_at }}</td>
-                                <td>{{ $item->name }}</td>
+                                <td>
+                                    <a href="{{ route('application.edit', $item->id) }}"> {{ $item->name }}</a>
+
+                                </td>
                                 <td>
                                     @if ($item->status == 1)
                                         Active
@@ -72,14 +74,15 @@
                                     @endif
                                 </td>
                                 @php
-                                    if ($item->user_id) {
-                                        $user = App\Models\User::find($item->user_id);
+                                    if ($item->updated_by) {
+                                        $user = App\Models\User::find($item->updated_by);
                                         $username = $user->name;
                                     } else {
                                         $username = 'none';
                                     }
                                 @endphp
                                 <td>{{ $username }}</td>
+                                <td>{{ $item->updated_at }}</td>
                                 <td class="d-flex justify-content-between"><a class="btn btn-sm btn-primary"
                                         href="{{ route('application.edit', $item->id) }}">Edit</a>
 

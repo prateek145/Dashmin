@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->integer('user_id')->nullable();
             $table->string('name')->nullable();
             $table->integer('status')->nullable();
+            $table->integer('updated_by')->nullable();
             $table->longText('description')->nullable();
             $table->longText('attachments')->nullable();
             $table->timestamps();

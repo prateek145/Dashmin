@@ -52,13 +52,9 @@ class FieldController extends Controller
             unset($data['_token']);
             // dd($data);
             Field::create($data);
-            // $genral = '';
-            // $field = 'active';
-            // $genraltab = '';
-            // $fieldtab = 'show active';
             return redirect()
                 ->back()
-                ->with(['success' => 'Field Created.', 'genral' => '', 'field' => 'active', 'genraltab' => '', 'fieldtab' => 'show active']);
+                ->with(['success' => 'Field Created.', 'field' => 'active']);
         } catch (\Exception $th) {
             //throw $th;
             return redirect()
@@ -89,7 +85,9 @@ class FieldController extends Controller
         try {
             //code...
             $field = Field::find($id);
-            $groups = Group::where(['status' => 1])->get();
+            $groups = Group::where(['status' => 1])
+                ->latest()
+                ->get();
             // dd($field);
             return view('backend.field.edit', compact('field', 'groups'));
         } catch (\Exception $th) {
@@ -117,12 +115,16 @@ class FieldController extends Controller
             unset($data['_method']);
             unset($data['groups']);
 
-            if (count($request->groups) > 0) {
+            if ($request->groups) {
                 # code...
-                $data['groups'] = json_encode($request->groups);
+                if (count($request->groups) > 0) {
+                    // dd($request->groups);
+                    # code...
+                    $data['groups'] = json_encode($request->groups);
+                }
             }
 
-            if ($request->access == 'private') {
+            if ($request->access == 'public') {
                 # code...
                 $data['groups'] = null;
             }

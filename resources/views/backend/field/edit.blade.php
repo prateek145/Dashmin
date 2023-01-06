@@ -26,14 +26,11 @@
                         <label for="exampleInputEmail1" class="form-label">Type</label>
                         <select name="type" id="" class="form-control @error('type') is-invalid @enderror"
                             required>
-                            <option value="date">Date</option>
-                            <option value="file">File</option>
-                            <option value="file">Images</option>
-                            <option value="number">Ip Address</option>
-                            <option value="number">Numeric</option>
-                            <option value="text">Text</option>
-                            <option value="text">Value</option>
-                            <option value="text">User Group List</option>
+                            <option value="date">Date Time</option>
+                            <option value="file">Attachments/Images</option>
+                            <option value="number">IP Address/Numeric</option>
+                            <option value="text">Text/Value</option>
+                            <option value="longText">User Group List</option>
                         </select>
                     </div>
                     <div class="class mb-3">
@@ -74,13 +71,15 @@
 
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Access</label><br>
-                        <input type="radio" name="access" value="private">
-                        <label for="">Private</label><br>
-                        <input type="radio" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"
-                            name="access" value="public">
+                        <input type="radio" name="access" value="public">
                         <label for="">Public</label><br>
+                        <input type="radio" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"
+                            name="access" value="private">
+                        <label for="">Private</label><br>
 
                     </div>
+
+
 
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
@@ -125,7 +124,7 @@
                             </div>
                         </div>
                     </div>
-
+                    <input type="hidden" value="{{ auth()->id() }}" name="updated_by">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
